@@ -254,6 +254,7 @@ where
 	let backend = params.backend.clone();
 	let mut task_manager = params.task_manager;
 
+	#[allow(clippy::as-conversions)]
 	let (relay_chain_interface, collator_key) = build_relay_chain_interface(
 		polkadot_config,
 		&parachain_config,

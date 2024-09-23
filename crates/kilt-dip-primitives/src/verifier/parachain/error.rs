@@ -67,7 +67,7 @@ fn dip_parachain_state_proof_verifier_error_value_not_duplicated() {
 			let new_encoded_value = u16::from(new_value);
 			// DidOriginError is generic, and we cannot test its constraints in this unit
 			// test, so we skip it.
-			if new_encoded_value == u8::MAX as u16 * 3 {
+			if new_encoded_value == u16::from(u8::MAX) * 3 {
 				return values;
 			}
 			assert!(

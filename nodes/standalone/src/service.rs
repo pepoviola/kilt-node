@@ -106,6 +106,7 @@ pub(crate) fn new_partial(config: &Configuration) -> Result<PartialComponents, S
 		client.clone(),
 	);
 
+	#[allow(clippy::as_conversions)]
 	let (grandpa_block_import, grandpa_link) = sc_consensus_grandpa::block_import(
 		client.clone(),
 		GRANDPA_JUSTIFICATION_PERIOD,

@@ -111,6 +111,7 @@ pub type NodeBlock = generic::Block<Header, OpaqueExtrinsic>;
 pub type UncheckedExtrinsic = generic::UncheckedExtrinsic<Address, RuntimeCall, Signature, SignedExtra>;
 
 pub const MILLISECS_PER_BLOCK: u64 = 12000;
+#[allow(clippy::as_conversions)]
 pub const MINUTES: BlockNumber = 60_000 / (MILLISECS_PER_BLOCK as BlockNumber);
 pub const HOURS: BlockNumber = MINUTES * 60;
 
@@ -175,6 +176,7 @@ cumulus_pallet_parachain_system::register_validate_block! {
 
 const AVERAGE_ON_INITIALIZE_RATIO: Perbill = Perbill::from_percent(5);
 const NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(75);
+#[allow(clippy::as_conversions)]
 const MAXIMUM_BLOCK_WEIGHT: Weight = Weight::from_parts(
 	WEIGHT_REF_TIME_PER_SECOND.saturating_div(2),
 	cumulus_primitives_core::relay_chain::MAX_POV_SIZE as u64,

@@ -180,6 +180,7 @@ impl<
 				"Failed to verify DIP proof with error {:#?}",
 				inner_error
 			);
+			#[allow(clippy::as_conversions)]
 			return Err(DipParachainStateProofVerifierError::ProofComponentTooLarge(
 				inner_error as u8,
 			));

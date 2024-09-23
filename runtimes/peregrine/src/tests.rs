@@ -64,7 +64,7 @@ fn attestation_storage_sizes() {
 		/ (<Runtime as attestation::Config>::MaxDelegatedAttestations::get() as usize);
 	assert_eq!(
 		attestation_record + delegation_record,
-		MAX_ATTESTATION_BYTE_LENGTH as usize
+		usize::try_from(MAX_ATTESTATION_BYTE_LENGTH).unwrap()
 	)
 }
 
@@ -72,11 +72,14 @@ fn attestation_storage_sizes() {
 fn did_storage_sizes() {
 	// Service endpoint
 	let max_did_endpoint_size = did::service_endpoints::DidEndpoint::<Runtime>::max_encoded_len();
-	assert_eq!(max_did_endpoint_size, MAX_SERVICE_ENDPOINT_BYTE_LENGTH as usize);
+	assert_eq!(
+		max_did_endpoint_size,
+		usize::try_from(MAX_SERVICE_ENDPOINT_BYTE_LENGTH).unwrap()
+	);
 
 	// DID key
 	let max_did_key_size = did::did_details::DidPublicKey::<AccountId>::max_encoded_len();
-	assert_eq!(max_did_key_size, MAX_KEY_LENGTH as usize);
+	assert_eq!(max_did_key_size, usize::try_from(MAX_KEY_LENGTH).unwrap());
 }
 
 #[test]
@@ -92,7 +95,10 @@ fn did_lookup_storage_sizes() {
 
 	let did_connection_size = DidConnection::max_encoded_len();
 
-	assert_eq!(did_connection_size, MAX_CONNECTION_BYTE_LENGTH as usize)
+	assert_eq!(
+		did_connection_size,
+		usize::try_from(MAX_CONNECTION_BYTE_LENGTH).unwrap()
+	)
 }
 
 #[test]
@@ -100,7 +106,7 @@ fn web3_name_storage_sizes() {
 	let owner_size = Web3NameOf::<Runtime>::max_encoded_len();
 	let name_size = Web3OwnershipOf::<Runtime>::max_encoded_len();
 
-	assert_eq!(owner_size + name_size, MAX_NAME_BYTE_LENGTH as usize)
+	assert_eq!(owner_size + name_size, usize::try_from(MAX_NAME_BYTE_LENGTH).unwrap())
 }
 
 #[test]
@@ -108,7 +114,7 @@ fn indices_storage_sizes() {
 	type Indices = (<Runtime as frame_system::Config>::AccountId, BalanceOf<Runtime>, bool);
 
 	let size = Indices::max_encoded_len();
-	assert_eq!(size, MAX_INDICES_BYTE_LENGTH as usize)
+	assert_eq!(size, usize::try_from(MAX_INDICES_BYTE_LENGTH).unwrap())
 }
 
 #[test]
@@ -121,20 +127,23 @@ fn public_credentials_storage_sizes() {
 	// Each credential would have a different deposit, so no multiplier here
 	assert_eq!(
 		credential_entry_max_size + subject_id_max_size,
-		MAX_PUBLIC_CREDENTIAL_STORAGE_LENGTH as usize
+		usize::try_from(MAX_PUBLIC_CREDENTIAL_STORAGE_LENGTH).unwrap()
 	)
 }
 
 #[test]
 fn pallet_deposit_storage_max_key_length() {
-	assert_eq!(DepositKey::max_encoded_len(), MAX_DEPOSIT_PALLET_KEY_LENGTH as usize)
+	assert_eq!(
+		DepositKey::max_encoded_len(),
+		usize::try_from(MAX_DEPOSIT_PALLET_KEY_LENGTH).unwrap()
+	)
 }
 
 #[test]
 fn pallet_dip_provider_commitment_max_length() {
 	assert_eq!(
 		IdentityCommitmentOf::<Runtime>::max_encoded_len(),
-		MAX_COMMITMENT_BYTE_LENGTH as usize
+		usize::try_from(MAX_COMMITMENT_BYTE_LENGTH).unwrap()
 	)
 }
 
